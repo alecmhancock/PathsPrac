@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using BAMCIS.GeoJSON;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PathsPrac
 {
@@ -11,14 +13,15 @@ namespace PathsPrac
             _client = client;
         }
 
-        public string GetActiveAlertsBMX()
+       
+        public string GetJsonString(string url)
         {
-            var response = _client.GetAsync("https://api.weather.gov/alerts/active?area=AL").Result;
-            var responseString = response.Content.ReadAsStringAsync().Result;
-            return responseString;
+            var response = _client.GetAsync(url).Result;
+            var json = response.Content.ReadAsStringAsync().Result;
+            return json;
         }
-
-
+        
+        
 
     }
 }
