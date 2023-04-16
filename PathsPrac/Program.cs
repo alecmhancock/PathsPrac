@@ -2,6 +2,7 @@
 using PathsPrac;
 using System.Net.Http.Headers;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 
 #region Web client params
 var client = new HttpClient();
@@ -30,28 +31,21 @@ foreach (var props in Properties.features)
     }
     if (props.properties.@event == "Severe Thunderstorm Warning" || props.properties.@event == "Tornado Warning" || props.properties.@event == "Special Weather Statement")
     {
+        
         Console.WriteLine(props.properties.headline);
         Console.WriteLine(props.properties.id);
         Console.WriteLine($"Expires {props.properties.expires}");
         Console.WriteLine($"Areas affected: {props.properties.areaDesc}");
         Console.WriteLine(props.properties.description);
+        
         idList.Add(props.properties.id);
+        
         Console.WriteLine("\n");
 
 
     }
 
-    //THIS IS YOUR TODO, GET THE COORDINATES WORKING YOU MORON
 
-    //foreach (var geo in Geometry.features)
-    //{
-    //    if (idList.Contains(geo.properties.@id))
-    //    {
-    //        foreach(var coord in geo.geometry.coordinates)
-    //        {
-    //            Console.WriteLine(coord.ToString());
-    //        }
-    //    }
-    //}
+
 }
 
