@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PathsPrac
+namespace PathsPrac.Classes
 {
-    public class Thunderstorm
+    public class Tornado : Properties
     {
     }
 }

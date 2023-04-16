@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using PathsPrac;
+using PathsPrac.Classes;
 using System.Net.Http.Headers;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 
 #region Web client params
 var client = new HttpClient();
@@ -25,27 +23,44 @@ Root Geometry = JsonConvert.DeserializeObject<Root>(json);
 var idList = new List<string>();
 foreach (var props in Properties.features)
 {
-    if (props.properties.expires < currentTime || props.properties.headline == null)
+    if (props.properties.expires < currentTime || props.properties.headline == null || props.properties.@event == "Test Message")
+    {
+        continue;
+    }
+    if (props.geometry == null)
     {
         continue;
     }
     if (props.properties.@event == "Severe Thunderstorm Warning" || props.properties.@event == "Tornado Warning" || props.properties.@event == "Special Weather Statement")
     {
-        
+
         Console.WriteLine(props.properties.headline);
-        Console.WriteLine(props.properties.id);
+        Console.WriteLine(props.id);
         Console.WriteLine($"Expires {props.properties.expires}");
         Console.WriteLine($"Areas affected: {props.properties.areaDesc}");
         Console.WriteLine(props.properties.description);
-        
-        idList.Add(props.properties.id);
-        
-        Console.WriteLine("\n");
+        Console.WriteLine();
+        foreach (var list1 in props.geometry.coordinates)
+        {
+            foreach (var list2 in list1)
+            {
+                foreach (var coords in list2)
+                {
+                    Console.Write(coords + " ");
+                }
+                Console.WriteLine();
+            }
+            idList.Add(props.properties.id);
+
+            Console.WriteLine("\n");
+            Console.WriteLine("\n");
+            Console.WriteLine("\n");
+            Console.WriteLine("\n");
+
+
+        }
+
 
 
     }
-
-
-
 }
-

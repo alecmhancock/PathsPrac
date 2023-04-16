@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PathsPrac
+namespace PathsPrac.Classes
 {
     public class NwsApi
     {
@@ -13,15 +13,15 @@ namespace PathsPrac
             _client = client;
         }
 
-       
+
         public string GetJsonString(string url)
         {
             var response = _client.GetAsync(url).Result;
             var json = response.Content.ReadAsStringAsync().Result;
             return json;
         }
-        
-        
+
+
 
     }
 }
