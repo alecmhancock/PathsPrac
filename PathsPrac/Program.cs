@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PathsPrac.Classes;
 using System.Net.Http.Headers;
+using PathsPrac;
 
 #region Web client params
 var client = new HttpClient();
@@ -20,7 +21,6 @@ Console.WriteLine();
 
 Root Properties = JsonConvert.DeserializeObject<Root>(json);
 Root Geometry = JsonConvert.DeserializeObject<Root>(json);
-var idList = new List<string>();
 foreach (var props in Properties.features)
 {
     if (props.properties.expires < currentTime || props.properties.headline == null || props.properties.@event == "Test Message")
@@ -40,22 +40,25 @@ foreach (var props in Properties.features)
         Console.WriteLine($"Areas affected: {props.properties.areaDesc}");
         Console.WriteLine(props.properties.description);
         Console.WriteLine();
+        
         foreach (var list1 in props.geometry.coordinates)
         {
             foreach (var list2 in list1)
             {
                 foreach (var coords in list2)
                 {
-                    Console.Write(coords + " ");
+                    
                 }
                 Console.WriteLine();
             }
-            idList.Add(props.properties.id);
+           
 
             Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine("\n");
+
+            
 
 
         }
